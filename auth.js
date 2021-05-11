@@ -15,15 +15,8 @@ require("dotenv").config();
 
 /**get /login*/
 
-router.get(
-    "/login",
-    passport.authenticate("auth0", {
-        scope: "open id email profile"
-    }),
-    (req, res) => {
-        res.redirect("/");
-    }
-);
+router.get("/login", passport.authenticate("auth0", {scope: "open id email profile"}),
+    (req, res) => { res.redirect("/");});
 
 /**get /callback*/
 
