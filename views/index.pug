@@ -1,0 +1,17 @@
+extends layout
+
+block layout-content
+    div.View.WelcomeView
+        h1.Banner ALLNIGHTER
+        div.Message
+            div.Title
+                h3 Making the Best
+                h1 Pairs of Socks for Cold Nights
+                Span.Details Access the AllNIGHTER Team Portal
+                Div.NavButtons
+                if isAuthenticated
+                    a(href="/user")
+                    div.NavButton Just dive in!
+                else
+                    a(href="/login")
+                    div.NavButton Log in
