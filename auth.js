@@ -10,13 +10,10 @@ const querystring = require("querystring");
 
 require("dotenv").config();
 
-/**
- * Routes Definitions (control)
+/**Routes Definitions (control)
 * */
 
-/**
- * get /login
- */
+/**get /login*/
 
 router.get(
     "/login",
@@ -28,9 +25,7 @@ router.get(
     }
 );
 
-/**
- * get /callback
- */
+/**get /callback*/
 
 router.get("/callback", (req, res, next) => {
     passport.authenticate("auth0", (err, user, info) => {
@@ -51,9 +46,7 @@ router.get("/callback", (req, res, next) => {
     })(req, res, next);
 });
 
-/**
- * get /logout
- */
+/**get /logout*/
 
 router.get("/logout", (req, res) => {
     req.logOut();
@@ -65,7 +58,7 @@ router.get("/logout", (req, res) => {
         returnTo =
             process.env.NODE_ENV === "production"
                 ? `${returnTo}/`
-                ? `${returnTo}:${port}/`;
+                : `${returnTo}:${port}/`;
     }
 
     const logoutURL = new URL(

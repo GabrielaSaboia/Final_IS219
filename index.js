@@ -14,7 +14,7 @@ const authRouter = require("./auth");
 /*
 * App variables
 * */
-const app = express();//declaration of express aplication
+const app = express();//declaration of express application
 const port = process.env.PORT || "8000";
 
 /*
@@ -87,3 +87,35 @@ app.use((req, res, next) => {
 * */
 
 app.use("/", authRouter);
+
+/**
+ * Routes Definitions
+ */
+
+const secured = (req, res, next) => {
+    if (req.user) {
+        return next();
+    }
+    req.session.returnTo = req.originalUrl;
+    res.redirect("/login");
+};
+
+app.get("/", (req, res) => {
+    res.render("index", { title: "Home" });
+});
+
+app.get("/user", secured, (req, res, next) => {
+    const { _raw, _json, ...userProfile } = req.user;
+    res.render("user", {
+        title: "Profile",
+        userProfile: userProfile
+    });
+});
+
+/**
+ * Server Activation
+ */
+
+app.listen(port, () => {
+    console.log(`Listening to requests on http://localhost:${port}`);
+});
